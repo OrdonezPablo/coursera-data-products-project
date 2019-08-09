@@ -8,5 +8,6 @@ link to the shiny app:
 https://ordonezpablo.shinyapps.io/project_final/
 
 link to presentation pitch:
+
 http://rpubs.com/Pablo_Odz/dp_pitch_shiny
 
