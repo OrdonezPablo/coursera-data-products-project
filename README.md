@@ -6,3 +6,7 @@ The shiny app for this project is an application to finance, measuring and illus
 link to the shiny app: 
 
 https://ordonezpablo.shinyapps.io/project_final/
+
+link to presentation pitch:
+http://rpubs.com/Pablo_Odz/dp_pitch_shiny
+

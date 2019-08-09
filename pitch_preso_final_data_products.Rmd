@@ -1,0 +1,82 @@
+---
+title: "Data Products Final Project"
+author: "Pablo Ordonez"
+date: "8/9/2019"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Shiny App: Global Equity Market Valuations
+
+This is my presentation pitch for the Coursera Data Products Final Course Project. The shiny app develpod explores data on global equity market valuations.
+
+- The first tab in the app shows a leaflet map showing a color map for global equity market valuations.
+- The second tab in the app shows the time series detial for each country, using Shiny's reactivness functions to loop through different countries.
+- The final tab shows the reference to understand the purpose of the app and some links to external documentation and to the Github repository for the code.
+
+
+Github code:https://github.com/OrdonezPablo/coursera-data-products-project
+
+Shiny app: https://ordonezpablo.shinyapps.io/project_final/
+
+
+
+### First tab: Global Equity Market Valuations
+
+- In this first tab we used the leaflet library, also part of the Data proudcts course material.
+- We used a global map using a shapfile found here thematicmapping.org
+- We then crossed the data with the shapefile data.
+- The code below illustrates an example of the map 
+
+```{r leaflet map, echo = TRUE, eval=FALSE}
+
+#load shape file, csv and merge data
+sfdf <- readOGR(dsn = getwd(), layer = "TM_WORLD_BORDERS-0.3")
+country_pe <- read_excel("./country pe.xlsx", 
+                         sheet = "spot pe (value)", skip = 4)
+mymerge <- merge(sfdf, country_pe, by = "NAME")
+
+#example of code for leaflet map
+leaflet(data = mymerge) %>% 
+  addTiles() %>% 
+  setView( lat = 10, lng = 0, zoom = 1) %>% 
+  addPolygons
+
+```
+
+### Second tab: Global Equity Market Valuations
+
+- In this second tab we had two objectives
+- using the reactive benefits from shiny to scroll through different countries
+- and illustration each market's P/E multipe with the plotly chart application to ggplots
+
+```{r plotly_charts, echo = TRUE, eval=FALSE}
+
+selectedData <- reactive({
+        
+        pe_ts_long %>% 
+            filter(index == input$index) %>% 
+            mutate(mean = mean(pe))
+        
+    })
+    
+    output$plot1 <- renderPlotly({
+        ggplot(selectedData(), aes(Date, pe)) +
+            geom_line() +
+            geom_hline(aes(yintercept=mean)) +
+            labs(
+                y = "Price to Earnings Ratio",
+                x = "Date"
+            )
+    })
+
+```
+
+### Coursera Data Products Project
+
+Thanks!
