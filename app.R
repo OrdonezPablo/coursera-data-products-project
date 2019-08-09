@@ -50,8 +50,8 @@ ui <- fluidPage(
                                               "https://www.investopedia.com/terms/p/price-earningsratio.asp",
                                               target = "_blank"),
                                             h5("Github Code:"),
-                                            a(href = "http://github.com",
-                                              "http://github.com",
+                                            a(href = "https://github.com/OrdonezPablo/coursera-data-products-project",
+                                              "https://github.com/OrdonezPablo/coursera-data-products-project",
                                               target = "_blank")
                                         ))
     )
